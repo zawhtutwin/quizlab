@@ -25,11 +25,7 @@ App.config(['$routeProvider', function ($routeProvider) {
         templateUrl: 'cinemas/layout',
         controller: CinemaController
     });
-    
-    $routeProvider.when('/reports', {
-        templateUrl: 'reports/layout',
-        controller: ReportController
-    });    
+      
     
     $routeProvider.when('/quizes', {
         templateUrl: 'quiz/layout',
