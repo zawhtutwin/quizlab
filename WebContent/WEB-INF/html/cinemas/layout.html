@@ -1,0 +1,9 @@
+<table class="table table-bordered table-striped" style="width:450px; margin-left: 100px;" ng-show="cinemas.length > 0">
+     <tr ng-repeat="c in cinemas">
+         <td>{{c}}</td><td><button class="btn btn-mini btn-danger" ng-click="removeCinema(c)">Remove</button></td>
+     </tr>
+</table>
+<div class="input-append">
+    <input style="width:358px; margin-left: 100px;" class="span2" type="text" ng-model="cinemaName" required min="1" />
+    <button class="btn btn-primary" ng-disabled="!cinemaName" ng-click="addNewCinema(cinemaName)">Add Cinema</button>
+</div>

@@ -1,0 +1,8 @@
+eclipse.preferences.version=1
+encoding//WebContent/WEB-INF/html/index.html=UTF-8
+encoding//WebContent/WEB-INF/html/quiz/layout.html=UTF-8
+encoding//WebContent/WEB-INF/html/reports/layout.html=Shift_JIS
+encoding//WebContent/resources/js/app.js=UTF-8
+encoding//WebContent/resources/js/controllers/QuizController.js=UTF-8
+encoding//WebContent/resources/js/controllers/ReportController.js=Shift_JIS
+encoding//src/main/java/com/xvitcoder/angualrspringapp/beans/TaskPerformance.java=UTF-8
