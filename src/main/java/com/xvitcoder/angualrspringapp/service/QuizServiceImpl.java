@@ -23,4 +23,13 @@ public class QuizServiceImpl implements QuizService {
 		return quizDao.getQuestionAndAnswers(questionId);
 	}
 
+	@Override
+	public void addQuestion(Question newQuestion) {
+		quizDao.addQuestion(newQuestion);
+	}
+
+	@Override
+	public List<Question> getAllQuestions() {
+		return quizDao.getAllQuestions();
+	}
 }

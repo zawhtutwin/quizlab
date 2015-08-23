@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50534
 File Encoding         : 65001
 
-Date: 2015-08-22 13:35:26
+Date: 2015-08-23 20:08:33
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -49,15 +49,45 @@ INSERT INTO `answer` VALUES ('15', 'ျပင္ပ test team မွ test လု
 INSERT INTO `answer` VALUES ('16', 'specific user(customer) အတြက္ customize လုပ္ထားေသာ software ကို test လုပ္ရာတြင္အသံုး၀င္သည္။', '4', 'F');
 
 -- ----------------------------
+-- Table structure for `design_work`
+-- ----------------------------
+DROP TABLE IF EXISTS `design_work`;
+CREATE TABLE `design_work` (
+  `work_no` varchar(255) NOT NULL,
+  `work` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`work_no`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of design_work
+-- ----------------------------
+
+-- ----------------------------
+-- Table structure for `member`
+-- ----------------------------
+DROP TABLE IF EXISTS `member`;
+CREATE TABLE `member` (
+  `member_id` int(11) NOT NULL,
+  `member_name` varchar(255) DEFAULT NULL,
+  `member_password` varchar(255) DEFAULT NULL,
+  PRIMARY KEY (`member_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of member
+-- ----------------------------
+INSERT INTO `member` VALUES ('1', 'zawhtutwin', null);
+
+-- ----------------------------
 -- Table structure for `question`
 -- ----------------------------
 DROP TABLE IF EXISTS `question`;
 CREATE TABLE `question` (
-  `question_id` int(11) NOT NULL,
+  `question_id` int(11) NOT NULL AUTO_INCREMENT,
   `question_text` varchar(1000) DEFAULT NULL,
   `next_question_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of question

@@ -28,6 +28,11 @@ public class QuizController {
         return quizService.getQuestionAndAnswers(questionId);
     }
     
+    @RequestMapping("/getAllQuestions.json")
+    public @ResponseBody List<Question> getAllQuestions() {
+        return quizService.getAllQuestions();
+    }
+    
     @RequestMapping("/layout")
     public String getQuizPartialPage() {
         return "quiz/layout";

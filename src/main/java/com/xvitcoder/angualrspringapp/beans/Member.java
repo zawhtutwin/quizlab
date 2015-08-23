@@ -8,11 +8,17 @@ import javax.persistence.Table;
 @Entity
 @Table(name="member")
 public class Member {
+	
 	@Id
 	@Column(name="member_id")
 	String memberId;
+	
 	@Column(name="member_name")
 	String memberName;
+	
+	@Column(name="member_password")
+	String memberPassword;
+	
 	public String getMemberId() {
 		return memberId;
 	}
@@ -25,4 +31,11 @@ public class Member {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
+	public String getMemberPassword() {
+		return memberPassword;
+	}
+	public void setMemberPassword(String memberPassword) {
+		this.memberPassword = memberPassword;
+	}
+	
 }

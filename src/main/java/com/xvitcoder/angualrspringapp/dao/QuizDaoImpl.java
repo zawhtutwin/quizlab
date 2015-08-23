@@ -33,6 +33,18 @@ public class QuizDaoImpl implements QuizDao {
 		Query q= entityManager.createQuery("select d from Question as d where d.questionId=:questionId",Question.class);
 		q.setParameter("questionId",questionId);
 		return q.getResultList();
+	}
+
+
+	
+	@Override
+	public void addQuestion(Question newQuestion) {
+		entityManager.persist(newQuestion);
+	}
+
+	@Override
+	public List<Question> getAllQuestions() {
+		return entityManager.createQuery("select d from Question as d",Question.class).getResultList();
 	}	
 	
 	

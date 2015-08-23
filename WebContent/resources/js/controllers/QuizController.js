@@ -7,17 +7,34 @@
 var QuizController = function($scope, $http,$sanitize) {
 	$scope.points=0;
 	$scope.done = false;
+	$scope.questionList = new Array();
 	$scope.questionText = $sanitize('ေမးခြန္း');
 	$scope.chooseText = $sanitize('ေရြးရန္');
     $scope.getFirstQuestionAndAnswers = function() {
-    	$http.get('quiz/getQuestionAndAnswers/1').success(function(result) {
+    	/*$http.get('quiz/getQuestionAndAnswers/1').success(function(result) {
         	$scope.question = result[0];
-        });
+        });*/
+    	 $scope.getQuestionAndAnswers(1);
         
     };
+   $scope.getAllQuestions =  function(){
+	   $http.get('quiz/getAllQuestions.json').success(function(result) {
+       		$scope.questionList = result;
+       		$scope.getFirstQuestionAndAnswers();
+       });
+	   
+   }
    
     $scope.getQuestionAndAnswers = function(questionId) {
-    	$http.get('quiz/getQuestionAndAnswers/'+questionId).success(function(result) {
+    	for(var i=0;i<$scope.questionList.length;i++){
+    		var q = $scope.questionList[i];
+    		if(q.questionId==questionId){
+    			$scope.question = q;
+    			break;
+    		}
+    	}
+    	
+    	/*$http.get('quiz/getQuestionAndAnswers/'+questionId).success(function(result) {
         	$scope.question = result[0];
         	var ans = result[0].answers;
         	for(var i=0;i<ans.length;i++){
@@ -25,9 +42,7 @@ var QuizController = function($scope, $http,$sanitize) {
         			$scope.correctResult = $sanitize(ans[i].answerText);
         		}
         	}
-        	$scope.done = false;
-        });
-        
+        	$scope.done = false;*/
     };
     
     $scope.chooseAnswer= function(answer){
@@ -42,6 +57,5 @@ var QuizController = function($scope, $http,$sanitize) {
     	}
     	$scope.done = true;
     };
-
-    $scope.getFirstQuestionAndAnswers();
+    $scope.getAllQuestions();
 };

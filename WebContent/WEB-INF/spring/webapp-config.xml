@@ -24,6 +24,16 @@
         <property name="prefix" value=""/>
         <property name="suffix" value=".html"/>
         <property name="exposeSpringMacroHelpers" value="true"/>
+         <property name="order" value="1" />
     </bean>
-
+   <bean
+        class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+        <property name="prefix">
+            <value>/WEB-INF/jsp/</value>
+        </property>
+        <property name="suffix">
+            <value>.jsp</value>
+        </property>
+        <property name="order" value="2" />
+    </bean>
 </beans>
