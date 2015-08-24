@@ -44,6 +44,19 @@ public class AdminController {
 		  return "admin";
 	 }	
 	
+	@RequestMapping(value = "/removeQuestion/{quesionId}", method = RequestMethod.GET)
+		   public String removeQuestion(@PathVariable("quesionId") Integer questionId,ModelMap model,HttpServletRequest request) {
+			 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
+					return "redirect:/login";
+			}
+		  Question filter = new Question();
+		  filter.setQuestionId(questionId);
+		  quizService.removeQuestion(filter);
+		  model.addAttribute("questionList",quizService.getAllQuestions());
+		  return "admin";
+	 }	
+	
+	
 	@RequestMapping(value = "/addAnswer", method = RequestMethod.POST)
 	   public String addQuestion(Answer answer,ModelMap model,HttpServletRequest request) {
 		 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){

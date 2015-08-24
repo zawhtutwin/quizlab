@@ -39,4 +39,10 @@ public class QuizServiceImpl implements QuizService {
 		quizDao.addAnswer(newAnswer);
 		
 	}
+
+	@Override
+	public void removeQuestion(Question question) {
+		quizDao.removeQuestion(question);
+		
+	}
 }

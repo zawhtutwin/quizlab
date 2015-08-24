@@ -11,4 +11,5 @@ public interface QuizService {
 	List<Question> getAllQuestions();
 	void addQuestion(Question newQuestion);
 	void addAnswer(Answer newAnswer);
+	void removeQuestion(Question question);
 }

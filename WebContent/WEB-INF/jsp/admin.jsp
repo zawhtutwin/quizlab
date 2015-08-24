@@ -63,6 +63,9 @@ $(document).ready(function() {
 	            <td>
 	            	<a href="<%= request.getContextPath() %>/admin/answer/view/<c:out value="${question.questionId}"/>"   class="btn-success btn-small">အေျဖထည့္ရန္</a>
 	            </td>
+	            <td>
+	            	<a href="<%= request.getContextPath() %>/admin/removeQuestion/<c:out value="${question.questionId}"/>"   class="btn-fail btn-small">ဖ်က္မည္</a>
+	            </td>	            
 	            </tr>
             </c:forEach>
         </tbody>

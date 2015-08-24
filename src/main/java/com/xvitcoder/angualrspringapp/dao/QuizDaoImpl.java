@@ -36,7 +36,11 @@ public class QuizDaoImpl implements QuizDao {
 		return q.getResultList();
 	}
 
-
+	@Override
+	public void removeQuestion(Question question){
+		Question toDelete = entityManager.find(Question.class,question.getQuestionId());
+		entityManager.remove(toDelete);
+	}
 	
 	@Override
 	public void addQuestion(Question newQuestion) {
