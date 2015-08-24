@@ -3,6 +3,7 @@ package com.xvitcoder.angualrspringapp.beans;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
@@ -27,7 +28,7 @@ public class Question {
 	@Column(name="next_question_id")
 	String nextQuestionId;
 	
-	@OneToMany(fetch=FetchType.EAGER)
+	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="question_id")
 	List<Answer> answers = new ArrayList<Answer>();
 	

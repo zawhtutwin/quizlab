@@ -23,6 +23,7 @@ $(document).ready(function() {
 <div class="container">
 <div class="row">
 <div class="col-sm-1">
+<h3>${question.questionText}</h3>
 <table id="questionsTable"  class="table table-striped table-bordered" width="100%" cellspacing="0">
         <tr>
             <c:forEach var = "ans" items = "${question.answers}"  >
@@ -40,5 +41,14 @@ $(document).ready(function() {
 </div>
 </div>
 </div>
+<form:form method="POST"  commandName="answer"  action="/QuizLab/admin/addAnswer"  accept-charset="UTF-8">
+       <legend>အေျဖ</legend>
+       <fieldset>
+       			<label for="answerText"></label><form:textarea  path="answerText"  cssStyle="width=100%"/>
+       			<form:hidden  path="questionId" />
+        		<input type="submit" value="Submit"  class="btn-primary" />
+        </fieldset>
+</table>  
+</form:form>
 </body>
 </html>

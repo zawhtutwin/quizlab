@@ -10,6 +10,7 @@ import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.xvitcoder.angualrspringapp.beans.Answer;
 import com.xvitcoder.angualrspringapp.beans.Question;
 
 @Repository("quizDao")
@@ -41,6 +42,12 @@ public class QuizDaoImpl implements QuizDao {
 	public void addQuestion(Question newQuestion) {
 		entityManager.persist(newQuestion);
 	}
+	
+	@Override
+	public void addAnswer(Answer newAnswer) {
+		entityManager.persist(newAnswer);
+	}	
+	
 
 	@Override
 	public List<Question> getAllQuestions() {

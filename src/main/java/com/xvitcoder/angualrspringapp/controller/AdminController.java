@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import com.xvitcoder.angualrspringapp.beans.Answer;
 import com.xvitcoder.angualrspringapp.beans.Question;
 import com.xvitcoder.angualrspringapp.service.QuizService;
 
@@ -43,6 +44,17 @@ public class AdminController {
 		  return "admin";
 	 }	
 	
+	@RequestMapping(value = "/addAnswer", method = RequestMethod.POST)
+	   public String addQuestion(Answer answer,ModelMap model,HttpServletRequest request) {
+		 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
+				return "redirect:/login";
+		}
+		  quizService.addAnswer(answer);
+		  model.addAttribute("questionList",quizService.getAllQuestions());
+		  return viewAnswers(model, request, answer.getQuestionId());
+	 }		
+	
+	
 	   @RequestMapping(value = "/answer/view/{quesionId}", method = RequestMethod.GET)
 	   public String viewAnswers(ModelMap model,HttpServletRequest request,@PathVariable("quesionId") Integer questionId) {
 		 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
@@ -50,6 +62,9 @@ public class AdminController {
 		 }
 		 List<Question> questionList =  quizService.getQuestionAndAnswers(questionId);
 		 model.addAttribute("question",questionList.get(0));
+		 Answer ans = new Answer();
+		 ans.setQuestionId(questionList.get(0).getQuestionId());
+		 model.addAttribute("answer",ans);
 		 return "answers_view";
 	 }	
 	 
@@ -57,5 +72,11 @@ public class AdminController {
 	 public Question createModel() {
 	     return new Question();
 	 }
+
+	 @ModelAttribute("answer")
+	 public Answer createAnswerModel() {
+	     return new Answer();
+	 }	 
+	 
 	 
 }
