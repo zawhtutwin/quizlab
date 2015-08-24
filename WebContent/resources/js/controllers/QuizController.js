@@ -8,6 +8,8 @@ var QuizController = function($scope, $http,$sanitize) {
 	$scope.points=0;
 	$scope.done = false;
 	$scope.questionList = new Array();
+	$scope.totalQuestion = 0;
+	$scope.noQuestion = false;
 	$scope.questionText = $sanitize('ေမးခြန္း');
 	$scope.chooseText = $sanitize('ေရြးရန္');
     $scope.getFirstQuestionAndAnswers = function() {
@@ -20,15 +22,20 @@ var QuizController = function($scope, $http,$sanitize) {
    $scope.getAllQuestions =  function(){
 	   $http.get('quiz/getAllQuestions.json').success(function(result) {
        		$scope.questionList = result;
+       		$scope.totalQuestion = $scope.questionList.length;
        		$scope.getFirstQuestionAndAnswers();
        });
 	   
    }
    
-    $scope.getQuestionAndAnswers = function(questionId) {
+    $scope.getQuestionAndAnswers = function(seq) {
+    	if(seq>$scope.totalQuestion){
+    		window.location.href = '#/cinemas';
+    	}
+    	
     	for(var i=0;i<$scope.questionList.length;i++){
     		var q = $scope.questionList[i];
-    		if(q.questionId==questionId){
+    		if(q.seq==seq){
     			$scope.question = q;
     			break;
     		}

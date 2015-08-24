@@ -22,7 +22,22 @@ $(document).ready(function() {
 <body>
 <div class="container">
 <div class="row">
-<div class="col-sm-1">
+<form:form method="POST"  commandName="answer"  action="${pageContext.request.contextPath}/admin/addAnswer"  accept-charset="UTF-8">
+       <legend>အေျဖ</legend>
+       <fieldset>
+       			<label for="answerText"></label><form:textarea  path="answerText"  cssStyle="width:100%" />
+       			<div class="radio">
+       				<label><form:radiobutton path="correctFlg"  value="T" />Correct</label>
+					<label><form:radiobutton path="correctFlg"  value="F"/>Wrong</label>
+				</div>
+				<BR>
+       			<form:hidden  path="questionId" />
+        		<input type="submit" value="Submit"  class="btn-primary" />
+        </fieldset>
+</table>  
+</form:form>
+</div>	
+<div class="row">
 <h3>${question.questionText}</h3>
 <table id="questionsTable"  class="table table-striped table-bordered" width="100%" cellspacing="0">
         <tr>
@@ -34,21 +49,20 @@ $(document).ready(function() {
 	            <td>
 	                <c:out value="${ans.answerText}"/>
 	            </td>
+	            <td>
+	                <c:out value="${ans.correctFlg}"/>
+	            </td>	            
+	            <td>
+	            <a href="<%=request.getContextPath()%>/admin/removeAnswer/${question.questionId}/${ans.answerId}" class="btn btn-danger btn-small">ဖ်က္မည္</a>
+	            </td>
 	            </tr>
             </c:forEach>
         </tr>
 </table>
 </div>
+<div class="row">
+<a href="${pageContext.request.contextPath}/admin/">Go Back to Question</a>
 </div>
 </div>
-<form:form method="POST"  commandName="answer"  action="/QuizLab/admin/addAnswer"  accept-charset="UTF-8">
-       <legend>အေျဖ</legend>
-       <fieldset>
-       			<label for="answerText"></label><form:textarea  path="answerText"  cssStyle="width=100%"/>
-       			<form:hidden  path="questionId" />
-        		<input type="submit" value="Submit"  class="btn-primary" />
-        </fieldset>
-</table>  
-</form:form>
 </body>
 </html>

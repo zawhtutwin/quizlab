@@ -45,4 +45,15 @@ public class QuizServiceImpl implements QuizService {
 		quizDao.removeQuestion(question);
 		
 	}
+	
+	@Override
+	public void removeAnswer(Answer answer) {
+		quizDao.removeAnswer(answer);
+	}
+
+	@Override
+	public List<Question> getQuestionAndAnswersBySeq(Integer seq) {
+		// TODO Auto-generated method stub
+		return null;
+	}
 }

@@ -67,6 +67,17 @@ public class AdminController {
 		  return viewAnswers(model, request, answer.getQuestionId());
 	 }		
 	
+	@RequestMapping(value = "/removeAnswer/{questionId}/{answerId}", method = RequestMethod.GET)
+	   public String removeAnswer(@PathVariable("questionId") Integer questionId,@PathVariable("answerId") Integer answerId,ModelMap model,HttpServletRequest request) {
+		 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
+				return "redirect:/login";
+		}
+		 Answer filter = new Answer();
+		 filter.setAnswerId(answerId);
+		 quizService.removeAnswer(filter);
+		 return viewAnswers(model, request, questionId);
+	}		
+	
 	
 	   @RequestMapping(value = "/answer/view/{quesionId}", method = RequestMethod.GET)
 	   public String viewAnswers(ModelMap model,HttpServletRequest request,@PathVariable("quesionId") Integer questionId) {
@@ -77,6 +88,7 @@ public class AdminController {
 		 model.addAttribute("question",questionList.get(0));
 		 Answer ans = new Answer();
 		 ans.setQuestionId(questionList.get(0).getQuestionId());
+		 ans.setCorrectFlg("F");
 		 model.addAttribute("answer",ans);
 		 return "answers_view";
 	 }	

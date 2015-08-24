@@ -28,6 +28,9 @@ public class Question {
 	@Column(name="next_question_id")
 	String nextQuestionId;
 	
+	@Column(name="seq")
+	Integer seq;
+	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="question_id")
 	List<Answer> answers = new ArrayList<Answer>();
@@ -62,6 +65,14 @@ public class Question {
 
 	public void setAnswers(List<Answer> answers) {
 		this.answers = answers;
+	}
+
+	public Integer getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
 	}
 	
 	

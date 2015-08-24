@@ -27,10 +27,10 @@ $(document).ready(function() {
 </head>
 <body>
 <div class="container">
-<form:form method="POST"  commandName="question"  action="/QuizLab/admin/addQuestion"  accept-charset="UTF-8">
+<form:form method="POST"  commandName="question"  action="${pageContext.request.contextPath}/admin/addQuestion"  accept-charset="UTF-8">
        <legend>ေမးခြန္းထည့္ရန္</legend>
        <fieldset>
-       			<label for="questionText"></label><form:textarea  path="questionText"  cssStyle="width=100%"/>
+       			<label for="questionText"></label><form:textarea  path="questionText"  cssStyle="width:100%"/>
         		<input type="submit" value="Submit"  class="btn-primary" />
         </fieldset>
 </table>  
@@ -61,10 +61,10 @@ $(document).ready(function() {
 	                <c:out value="${question.questionText}"/>
 	            </td>
 	            <td>
-	            	<a href="<%= request.getContextPath() %>/admin/answer/view/<c:out value="${question.questionId}"/>"   class="btn-success btn-small">အေျဖထည့္ရန္</a>
+	            	<a href="<%= request.getContextPath() %>/admin/answer/view/<c:out value="${question.questionId}"/>"   class="btn btn-success btn-small">အေျဖထည့္ရန္</a>
 	            </td>
 	            <td>
-	            	<a href="<%= request.getContextPath() %>/admin/removeQuestion/<c:out value="${question.questionId}"/>"   class="btn-fail btn-small">ဖ်က္မည္</a>
+	            	<a href="<%= request.getContextPath() %>/admin/removeQuestion/<c:out value="${question.questionId}"/>"   class="btn btn-danger btn-small">ဖ်က္မည္</a>
 	            </td>	            
 	            </tr>
             </c:forEach>

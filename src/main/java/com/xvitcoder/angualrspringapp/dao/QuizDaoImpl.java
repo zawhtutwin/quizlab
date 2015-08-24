@@ -35,6 +35,14 @@ public class QuizDaoImpl implements QuizDao {
 		q.setParameter("questionId",questionId);
 		return q.getResultList();
 	}
+	
+	@Override
+	public List<Question> getQuestionAndAnswersBySeq(Integer seq) {
+		Query q= entityManager.createQuery("select d from Question as d where d.seq=:seq",Question.class);
+		q.setParameter("seq",seq);
+		return q.getResultList();
+	}
+	
 
 	@Override
 	public void removeQuestion(Question question){
@@ -44,6 +52,9 @@ public class QuizDaoImpl implements QuizDao {
 	
 	@Override
 	public void addQuestion(Question newQuestion) {
+		Integer seq = (Integer)entityManager.createQuery("select max(q.questionId) from Question q").getSingleResult();
+		seq++;
+		newQuestion.setSeq(seq);
 		entityManager.persist(newQuestion);
 	}
 	
@@ -56,6 +67,12 @@ public class QuizDaoImpl implements QuizDao {
 	@Override
 	public List<Question> getAllQuestions() {
 		return entityManager.createQuery("select d from Question as d",Question.class).getResultList();
+	}
+
+	@Override
+	public void removeAnswer(Answer answer) {
+		Answer toDelete = entityManager.find(Answer.class,answer.getAnswerId());
+		entityManager.remove(toDelete);
 	}	
 	
 	
