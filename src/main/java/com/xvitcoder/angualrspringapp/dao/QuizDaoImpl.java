@@ -89,6 +89,23 @@ public class QuizDaoImpl implements QuizDao {
     		}
     	}
     	return p;
+	}
+
+	@Override
+	public List<QuestionPackage> getAllPackages() {
+		return entityManager.createQuery("select p from QuestionPackage p",QuestionPackage.class).getResultList();
+	}
+
+	@Override
+	public QuestionPackage getQuestionPackage(Integer packageId) {
+		QuestionPackage p =  entityManager.find(QuestionPackage.class, packageId);
+		for(Question ques:p.getQuestion()){
+    		ques.getQuestionId();
+    		for(Answer ans:ques.getAnswers()){
+    			ans.getAnswerId();
+    		}
+    	}
+		return p;
 	}	
 	
 	

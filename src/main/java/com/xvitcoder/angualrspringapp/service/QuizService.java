@@ -16,4 +16,6 @@ public interface QuizService {
 	void removeQuestion(Question question);
 	void removeAnswer(Answer answer);
 	QuestionPackage getQuestionPackageByName(String packageName);
+	List<QuestionPackage> getAllPackages();
+	QuestionPackage getQuestionPackage(Integer packageId);
 }

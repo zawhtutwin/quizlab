@@ -15,5 +15,7 @@ public interface QuizDao {
 	void addAnswer(Answer newAnswer);
 	void removeQuestion(Question question);
 	void removeAnswer(Answer answer);
+	List<QuestionPackage> getAllPackages();
 	QuestionPackage getQuestionPackageByName(String packageName);
+	QuestionPackage getQuestionPackage(Integer packageId);
 }

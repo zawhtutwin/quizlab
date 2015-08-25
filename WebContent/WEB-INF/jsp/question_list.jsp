@@ -27,15 +27,18 @@ $(document).ready(function() {
 </head>
 <body>
 <div class="container">
+<a href="${pageContext.request.contextPath}/admin">Packages></a>Questions
 <form:form method="POST"  commandName="question"  action="${pageContext.request.contextPath}/admin/addQuestion"  accept-charset="UTF-8">
        <legend>ေမးခြန္းထည့္ရန္</legend>
        <fieldset>
        			<label for="questionText"></label><form:textarea  path="questionText"  cssStyle="width:100%"/>
+       			<form:hidden path="packageId" />
         		<input type="submit" value="Submit"  class="btn-primary" />
         </fieldset>
 </table>  
 </form:form>
 <div class="fw-body">
+
 <table id="questionsTable"  class="table table-striped table-bordered" width="100%" cellspacing="0">
         <thead>
         <th>No.
@@ -52,7 +55,7 @@ $(document).ready(function() {
 			</tr>
 		</tfoot>
         <tbody>
-            <c:forEach var = "question" items = "${questionList}">
+            <c:forEach var = "question"  items = "${questionList}">
             <tr>
 	            <td>
 	                <c:out value="${question.questionId}"/>
@@ -64,7 +67,7 @@ $(document).ready(function() {
 	            	<a href="<%= request.getContextPath() %>/admin/answer/view/<c:out value="${question.questionId}"/>"   class="btn btn-success btn-small">အေျဖထည့္ရန္</a>
 	            </td>
 	            <td>
-	            	<a href="<%= request.getContextPath() %>/admin/removeQuestion/<c:out value="${question.questionId}"/>"   class="btn btn-danger btn-small">ဖ်က္မည္</a>
+	            	<a href="<%= request.getContextPath() %>/admin/removeQuestion/<c:out value="${question.questionId}"/>/${question.packageId}"   class="btn btn-danger btn-small">ဖ်က္မည္</a>
 	            </td>	            
 	            </tr>
             </c:forEach>

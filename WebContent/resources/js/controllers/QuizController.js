@@ -4,7 +4,7 @@
  * QuizController
  * @constructor
  */
-var QuizController = function($scope, $http,$sanitize) {
+var QuizController = function($scope,$http,$sanitize,$location) {
 	$scope.points=0;
 	$scope.done = false;
 	$scope.questionList = new Array();
@@ -12,6 +12,8 @@ var QuizController = function($scope, $http,$sanitize) {
 	$scope.noQuestion = false;
 	$scope.questionText = $sanitize('ေမးခြန္း');
 	$scope.chooseText = $sanitize('ေရြးရန္');
+	$scope.loaded = false;
+	$scope.packageName =  $location.search().packageName;
     $scope.getFirstQuestionAndAnswers = function() {
     	/*$http.get('quiz/getQuestionAndAnswers/1').success(function(result) {
         	$scope.question = result[0];
@@ -20,13 +22,14 @@ var QuizController = function($scope, $http,$sanitize) {
         
     };
    $scope.getAllQuestions =  function(){
+	   
 	   //$http.get('quiz/getAllQuestions.json').success(function(result) {
-	   $http.get('quiz/getQuestionsByPackage/istqb1').success(function(result) {	
-	   $scope.questionList = result;
+	   $http.get('quiz/getQuestionsByPackage/'+$scope.packageName).success(function(result) {	
+		   $scope.questionList = result;
        		$scope.totalQuestion = $scope.questionList.length;
        		$scope.getFirstQuestionAndAnswers();
+       		$scope.loaded = true;
        });
-	   
    }
    
     $scope.getQuestionAndAnswers = function(seq) {

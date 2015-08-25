@@ -77,6 +77,14 @@ public class Question {
 	public void setSeq(Integer seq) {
 		this.seq = seq;
 	}
+
+	public Integer getPackageId() {
+		return packageId;
+	}
+
+	public void setPackageId(Integer packageId) {
+		this.packageId = packageId;
+	}
 	
 	
 }

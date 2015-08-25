@@ -1,4 +1,5 @@
-<meta http-equiv="content-type" content="text/html; charset=UTF-8">
+<div ng-hide="loaded"  class="alert alert-info" align="center">Loading...</div>
+<div ng-show="loaded">
 <div class="row">
 	<div class="col-sm-3">
 	<h3><div ng-bind-html-unsafe="questionText">{{questionText}}</div></h3>
@@ -27,4 +28,5 @@
 		<div align="right">
 			<button class="btn btn-primary"    ng-click="getQuestionAndAnswers(question.seq+1)">Next Question</button>
 		</div>
+</div>
 </div>

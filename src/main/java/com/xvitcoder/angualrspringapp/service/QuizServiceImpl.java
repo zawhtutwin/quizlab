@@ -62,4 +62,14 @@ public class QuizServiceImpl implements QuizService {
 	public QuestionPackage getQuestionPackageByName(String packageName) {
 		return quizDao.getQuestionPackageByName(packageName);
 	}
+
+	@Override
+	public List<QuestionPackage> getAllPackages() {
+		return quizDao.getAllPackages();
+	}
+
+	@Override
+	public QuestionPackage getQuestionPackage(Integer packageId) {
+		return quizDao.getQuestionPackage(packageId);
+	}
 }

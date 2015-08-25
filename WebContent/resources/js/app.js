@@ -30,7 +30,7 @@ App.config(['$routeProvider', function ($routeProvider) {
     $routeProvider.when('/quizes', {
         templateUrl: 'quiz/layout',
         controller: QuizController
-    });    
-
-    $routeProvider.otherwise({redirectTo: '/quizes'});
+    });   
+   
 }]);
+location.href="#/quizes?packageName=istqb1";

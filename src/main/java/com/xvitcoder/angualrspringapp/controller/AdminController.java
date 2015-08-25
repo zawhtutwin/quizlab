@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.xvitcoder.angualrspringapp.beans.Answer;
 import com.xvitcoder.angualrspringapp.beans.Question;
+import com.xvitcoder.angualrspringapp.beans.QuestionPackage;
 import com.xvitcoder.angualrspringapp.service.QuizService;
 
 @Controller
@@ -24,36 +25,47 @@ public class AdminController {
 	QuizService quizService;
 	
 	@RequestMapping
-	String showAdminPage(HttpServletRequest request,ModelMap model){
+	String getAllPackages(HttpServletRequest request,ModelMap model){
+		if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
+			return "redirect:/login";
+		}
+		model.addAttribute("questionPackageList",quizService.getAllPackages());
+		return "package_list";
+	}
+	
+	@RequestMapping(value = "/getAllQuesionByPackage/{packageId}", method = RequestMethod.GET)
+	String getAllQuesionByPackage(HttpServletRequest request,@PathVariable("packageId")Integer packageId,ModelMap model){
 		if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
 				return "redirect:/login";
 		}
-		model.addAttribute("questionList",quizService.getAllQuestions());
-		return "admin";
+		Question question = new Question();
+		question.setPackageId(packageId);
+		//model.addAttribute("questionList",quizService.getAllQuestions());
+		model.addAttribute("question",question);
+		model.addAttribute("questionList",quizService.getQuestionPackage(packageId).getQuestion());
+		return "question_list";
 	}
 	
 	List<Question> questionList = new ArrayList<Question>();
 	
 	@RequestMapping(value = "/addQuestion", method = RequestMethod.POST)
 	   public String addQuestion(Question question,ModelMap model,HttpServletRequest request) {
-		 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
-				return "redirect:/login";
-		}
+		  if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
+					return "redirect:/login";
+		  }
 		  quizService.addQuestion(question);
-		  model.addAttribute("questionList",quizService.getAllQuestions());
-		  return "admin";
+		  return getAllQuesionByPackage(request,question.getPackageId(), model);
 	 }	
 	
-	@RequestMapping(value = "/removeQuestion/{quesionId}", method = RequestMethod.GET)
-		   public String removeQuestion(@PathVariable("quesionId") Integer questionId,ModelMap model,HttpServletRequest request) {
+	@RequestMapping(value = "/removeQuestion/{quesionId}/{packageId}", method = RequestMethod.GET)
+		   public String removeQuestion(@PathVariable("quesionId") Integer questionId,@PathVariable("packageId")Integer packageId,ModelMap model,HttpServletRequest request) {
 			 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
 					return "redirect:/login";
 			}
 		  Question filter = new Question();
 		  filter.setQuestionId(questionId);
 		  quizService.removeQuestion(filter);
-		  model.addAttribute("questionList",quizService.getAllQuestions());
-		  return "admin";
+		  return getAllQuesionByPackage(request, packageId, model);
 	 }	
 	
 	

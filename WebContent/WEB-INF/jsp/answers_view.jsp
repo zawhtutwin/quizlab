@@ -22,6 +22,9 @@ $(document).ready(function() {
 <body>
 <div class="container">
 <div class="row">
+	<a href="${pageContext.request.contextPath}/admin">Packages></a><a href="${pageContext.request.contextPath}/admin/getAllQuesionByPackage/${question.packageId}">Questions></a>Answers
+</div>
+<div class="row">
 <form:form method="POST"  commandName="answer"  action="${pageContext.request.contextPath}/admin/addAnswer"  accept-charset="UTF-8">
        <legend>အေျဖ</legend>
        <fieldset>
