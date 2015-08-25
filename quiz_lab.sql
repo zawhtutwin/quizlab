@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50534
+Source Server Version : 50614
 Source Host           : localhost:3306
 Source Database       : quiz_lab
 
 Target Server Type    : MYSQL
-Target Server Version : 50534
+Target Server Version : 50614
 File Encoding         : 65001
 
-Date: 2015-08-23 20:08:33
+Date: 2015-08-25 20:38:29
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -19,14 +19,14 @@ SET FOREIGN_KEY_CHECKS=0;
 -- ----------------------------
 DROP TABLE IF EXISTS `answer`;
 CREATE TABLE `answer` (
-  `answer_id` int(11) NOT NULL,
+  `answer_id` int(11) NOT NULL AUTO_INCREMENT,
   `answer_text` varchar(1000) DEFAULT NULL,
   `question_id` int(11) DEFAULT NULL,
   `correct_flg` varchar(1) DEFAULT 'F',
   PRIMARY KEY (`answer_id`),
   KEY `FKABCA3FBE5C95740C` (`question_id`),
   CONSTRAINT `FKABCA3FBE5C95740C` FOREIGN KEY (`question_id`) REFERENCES `question` (`question_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of answer
@@ -76,7 +76,7 @@ CREATE TABLE `member` (
 -- ----------------------------
 -- Records of member
 -- ----------------------------
-INSERT INTO `member` VALUES ('1', 'zawhtutwin', null);
+INSERT INTO `member` VALUES ('1', 'zawhtutwin', '554433');
 
 -- ----------------------------
 -- Table structure for `question`
@@ -86,13 +86,32 @@ CREATE TABLE `question` (
   `question_id` int(11) NOT NULL AUTO_INCREMENT,
   `question_text` varchar(1000) DEFAULT NULL,
   `next_question_id` int(11) DEFAULT NULL,
-  PRIMARY KEY (`question_id`)
+  `seq` int(11) DEFAULT NULL,
+  `package_id` int(11) DEFAULT NULL,
+  PRIMARY KEY (`question_id`),
+  KEY `FKBA823BE6D79664E2` (`package_id`),
+  CONSTRAINT `FKBA823BE6D79664E2` FOREIGN KEY (`package_id`) REFERENCES `question_package` (`package_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of question
 -- ----------------------------
-INSERT INTO `question` VALUES ('1', 'Emergency changes မ်ားကိုျပင္ျပီးလ်င္ မည္သည့္အခ်က္ကိုလုပ္ေဆာင္ရမည္နည္း', '2');
-INSERT INTO `question` VALUES ('2', 'ISTQB Glossary အရ regression test ကိုအဘယ္ေၾကာင့္လုပ္ေဆာင္ရန္လိုအပ္သနည္း', '3');
-INSERT INTO `question` VALUES ('3', 'statement coverage ႏွင့္ decision coverage ႏွစ္ခု မည္သို ့ဆက္စပ္ေနသနည္း', '4');
-INSERT INTO `question` VALUES ('4', 'Beta Testing ဆိုသည္မွာ', '1');
+INSERT INTO `question` VALUES ('1', 'Emergency changes မ်ားကိုျပင္ျပီးလ်င္ မည္သည့္အခ်က္ကိုလုပ္ေဆာင္ရမည္နည္း', '2', '1', '1');
+INSERT INTO `question` VALUES ('2', 'ISTQB Glossary အရ regression test ကိုအဘယ္ေၾကာင့္လုပ္ေဆာင္ရန္လိုအပ္သနည္း', '3', '2', '1');
+INSERT INTO `question` VALUES ('3', 'statement coverage ႏွင့္ decision coverage ႏွစ္ခု မည္သို ့ဆက္စပ္ေနသနည္း', '4', '3', '1');
+INSERT INTO `question` VALUES ('4', 'Beta Testing ဆိုသည္မွာ', '1', '4', '1');
+
+-- ----------------------------
+-- Table structure for `question_package`
+-- ----------------------------
+DROP TABLE IF EXISTS `question_package`;
+CREATE TABLE `question_package` (
+  `package_id` int(11) NOT NULL AUTO_INCREMENT,
+  `package_name` varchar(200) DEFAULT NULL,
+  PRIMARY KEY (`package_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of question_package
+-- ----------------------------
+INSERT INTO `question_package` VALUES ('1', 'istqb1');

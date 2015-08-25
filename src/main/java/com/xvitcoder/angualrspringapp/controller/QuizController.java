@@ -9,7 +9,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.xvitcoder.angualrspringapp.beans.Answer;
 import com.xvitcoder.angualrspringapp.beans.Question;
+import com.xvitcoder.angualrspringapp.beans.QuestionPackage;
 import com.xvitcoder.angualrspringapp.service.QuizService;
 
 @Controller
@@ -27,6 +29,13 @@ public class QuizController {
     public @ResponseBody List<Question> getQuestionAndAnswers(@PathVariable("questionId")Integer questionId) {
         return quizService.getQuestionAndAnswers(questionId);
     }
+
+    @RequestMapping(value = "/getQuestionsByPackage/{packageName}", method = RequestMethod.GET)
+    public @ResponseBody List<Question> getQuestionsByPackage(@PathVariable("packageName")String packageName) {
+    	QuestionPackage p = quizService.getQuestionPackageByName(packageName);
+    	return p.getQuestion();
+    }
+    
     
     @RequestMapping("/getAllQuestions.json")
     public @ResponseBody List<Question> getAllQuestions() {

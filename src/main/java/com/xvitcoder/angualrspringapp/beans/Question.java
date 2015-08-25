@@ -31,6 +31,9 @@ public class Question {
 	@Column(name="seq")
 	Integer seq;
 	
+	@Column(name="package_id")
+	Integer packageId;
+	
 	@OneToMany(fetch=FetchType.EAGER,cascade=CascadeType.ALL,orphanRemoval=true)
 	@JoinColumn(name="question_id")
 	List<Answer> answers = new ArrayList<Answer>();

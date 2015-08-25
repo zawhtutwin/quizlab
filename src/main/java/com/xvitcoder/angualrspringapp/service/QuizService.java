@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.xvitcoder.angualrspringapp.beans.Answer;
 import com.xvitcoder.angualrspringapp.beans.Question;
+import com.xvitcoder.angualrspringapp.beans.QuestionPackage;
 
 public interface QuizService {
 	List<Integer> getAllQuestionId();
@@ -14,4 +15,5 @@ public interface QuizService {
 	void addAnswer(Answer newAnswer);
 	void removeQuestion(Question question);
 	void removeAnswer(Answer answer);
+	QuestionPackage getQuestionPackageByName(String packageName);
 }

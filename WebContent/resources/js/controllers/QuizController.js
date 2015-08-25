@@ -20,8 +20,9 @@ var QuizController = function($scope, $http,$sanitize) {
         
     };
    $scope.getAllQuestions =  function(){
-	   $http.get('quiz/getAllQuestions.json').success(function(result) {
-       		$scope.questionList = result;
+	   //$http.get('quiz/getAllQuestions.json').success(function(result) {
+	   $http.get('quiz/getQuestionsByPackage/istqb1').success(function(result) {	
+	   $scope.questionList = result;
        		$scope.totalQuestion = $scope.questionList.length;
        		$scope.getFirstQuestionAndAnswers();
        });

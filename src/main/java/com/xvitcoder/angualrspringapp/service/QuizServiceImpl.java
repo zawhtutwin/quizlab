@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.xvitcoder.angualrspringapp.beans.Answer;
 import com.xvitcoder.angualrspringapp.beans.Question;
+import com.xvitcoder.angualrspringapp.beans.QuestionPackage;
 import com.xvitcoder.angualrspringapp.dao.QuizDao;
 @Service("quizService")
 public class QuizServiceImpl implements QuizService {
@@ -55,5 +56,10 @@ public class QuizServiceImpl implements QuizService {
 	public List<Question> getQuestionAndAnswersBySeq(Integer seq) {
 		// TODO Auto-generated method stub
 		return null;
+	}
+
+	@Override
+	public QuestionPackage getQuestionPackageByName(String packageName) {
+		return quizDao.getQuestionPackageByName(packageName);
 	}
 }

@@ -12,6 +12,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.xvitcoder.angualrspringapp.beans.Answer;
 import com.xvitcoder.angualrspringapp.beans.Question;
+import com.xvitcoder.angualrspringapp.beans.QuestionPackage;
 
 @Repository("quizDao")
 @Transactional(value = "transactionManager",propagation = Propagation.REQUIRES_NEW)
@@ -73,6 +74,21 @@ public class QuizDaoImpl implements QuizDao {
 	public void removeAnswer(Answer answer) {
 		Answer toDelete = entityManager.find(Answer.class,answer.getAnswerId());
 		entityManager.remove(toDelete);
+	}
+
+	@Override
+	public QuestionPackage getQuestionPackageByName(String packageName) {
+		Query q = entityManager.createQuery("Select m from QuestionPackage m where m.packageName=:packageName",QuestionPackage.class);
+		q.setParameter("packageName", packageName);
+		System.out.println("Fetching Questions");
+		QuestionPackage p = (QuestionPackage)q.getSingleResult();
+    	for(Question ques:p.getQuestion()){
+    		ques.getQuestionId();
+    		for(Answer ans:ques.getAnswers()){
+    			ans.getAnswerId();
+    		}
+    	}
+    	return p;
 	}	
 	
 	
