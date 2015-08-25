@@ -12,6 +12,7 @@ var QuizController = function($scope, $http,$sanitize) {
 	$scope.noQuestion = false;
 	$scope.questionText = $sanitize('ေမးခြန္း');
 	$scope.chooseText = $sanitize('ေရြးရန္');
+	$scope.loaded = false;
     $scope.getFirstQuestionAndAnswers = function() {
     	/*$http.get('quiz/getQuestionAndAnswers/1').success(function(result) {
         	$scope.question = result[0];
@@ -24,6 +25,7 @@ var QuizController = function($scope, $http,$sanitize) {
        		$scope.questionList = result;
        		$scope.totalQuestion = $scope.questionList.length;
        		$scope.getFirstQuestionAndAnswers();
+       		$scope.loaded=true;
        });
 	   
    }
