@@ -4,8 +4,8 @@
  * QuizController
  * @constructor
  */
-var QuizController = function($scope,$http,$sanitize,$location) {
-	$scope.points=0;
+var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
+	$rootScope.points=0;
 	$scope.done = false;
 	$scope.questionList = new Array();
 	$scope.totalQuestion = 0;
@@ -64,7 +64,7 @@ var QuizController = function($scope,$http,$sanitize,$location) {
     	if($scope.userChoice==""){
     		$scope.userChoice = answer.correctFlg;
     		if($scope.userChoice=="T"){
-    			$scope.points = $scope.points + 1;
+    			$rootScope.points = $scope.points + 1;
     		}
     	}
     	
