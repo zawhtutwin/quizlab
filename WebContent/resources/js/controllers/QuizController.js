@@ -14,6 +14,7 @@ var QuizController = function($scope,$http,$sanitize,$location) {
 	$scope.chooseText = $sanitize('ေရြးရန္');
 	$scope.loaded = false;
 	$scope.packageName =  $location.search().packageName;
+	$scope.userChoice = "";
     $scope.getFirstQuestionAndAnswers = function() {
     	/*$http.get('quiz/getQuestionAndAnswers/1').success(function(result) {
         	$scope.question = result[0];
@@ -36,7 +37,10 @@ var QuizController = function($scope,$http,$sanitize,$location) {
     	if(seq>$scope.totalQuestion){
     		window.location.href = '#/cinemas';
     	}
-    	
+    	if($scope.userChoice=="T"){
+    		
+    	}
+    	$scope.userChoice="";
     	for(var i=0;i<$scope.questionList.length;i++){
     		var q = $scope.questionList[i];
     		if(q.seq==seq){
@@ -57,14 +61,18 @@ var QuizController = function($scope,$http,$sanitize,$location) {
     };
     
     $scope.chooseAnswer= function(answer){
+    	if($scope.userChoice==""){
+    		$scope.userChoice = answer.correctFlg;
+    		if($scope.userChoice=="T"){
+    			$scope.points = $scope.points + 1;
+    		}
+    	}
+    	
     	if(answer.correctFlg=='T'){
     		answer.result = "<font color='green'><b>Correct</b></font>";
-    		$scope.points = $scope.points + 1;
+    		
     	}else{
     		answer.result = "<font color='red'><b>Wrong</b></font>";
-    		if($scope.points >0){
-    			$scope.points = $scope.points - 1;
-    		}
     	}
     	$scope.done = true;
     };
