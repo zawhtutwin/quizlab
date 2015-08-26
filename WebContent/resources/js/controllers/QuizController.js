@@ -10,11 +10,15 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
 	$scope.questionList = new Array();
 	$scope.totalQuestion = 0;
 	$scope.noQuestion = false;
-	$scope.questionText = $sanitize('ေမးခြန္း');
-	$scope.chooseText = $sanitize('ေရြးရန္');
+	$scope.questionText = 'ေမးခြန္း';
+	$scope.chooseText = 'ေရြးရန္';
 	$scope.loaded = false;
 	$scope.packageName =  $location.search().packageName;
 	$scope.userChoice = "";
+	
+
+	
+	
     $scope.getFirstQuestionAndAnswers = function() {
     	/*$http.get('quiz/getQuestionAndAnswers/1').success(function(result) {
         	$scope.question = result[0];

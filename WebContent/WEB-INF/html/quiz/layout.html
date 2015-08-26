@@ -2,13 +2,13 @@
 <div ng-show="loaded">
 <div class="row">
 	<div class="col-sm-3">
-	<h3><div ng-bind-html-unsafe="questionText">{{questionText}}</div></h3>
+	<h3><div>{{questionText}}</div></h3>
 	</div>
 </div>
 <div class="row">
 	<div class="col-sm-3">
 		<span>{{question.questionText}}</span><span><h3 style="color: gray;">{{result}}</span>
-		<h3><div ng-bind-html-unsafe="chooseText">{{chooseText}}</div></h3>
+		<h3><div>{{chooseText}}</div></h3>
 		<table class="table table-bordered table-striped" width="100%">
 			<tbody>
 				<tr ng-repeat="answer in question.answers">
@@ -17,7 +17,7 @@
 						<button class="btn btn-mini btn-success"    ng-click="chooseAnswer(answer)">Choose</button>
 					</td>
 					<td style="width: 15%; text-align: center;" >
-						<div  ng-bind-html-unsafe="answer.result">{{answer.result}}</div>
+						<div  ng-bind-html="answer.result">{{answer.result}}</div>
 					</td>
 				</tr>
 			</tbody>
