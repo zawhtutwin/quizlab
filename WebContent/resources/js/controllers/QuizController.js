@@ -15,6 +15,8 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
 	$scope.loaded = false;
 	$scope.packageName =  $location.search().packageName;
 	$scope.userChoice = "";
+	$scope.count =0;
+	
 	
     meSpeak.loadConfig("resources/js/lib/mespeak_config.json");
     meSpeak.loadVoice("resources/voices/en/en-us.json");
@@ -44,20 +46,22 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
    
     $scope.getQuestionAndAnswers = function(seq) {
     	
-    	if(seq>$scope.totalQuestion){
+    	if($scope.count>=$scope.totalQuestion){
     		window.location.href = '#/cinemas';
     	}
     	if($scope.userChoice=="T"){
     		
     	}
     	$scope.userChoice="";
-    	for(var i=0;i<$scope.questionList.length;i++){
+    	$scope.question = $scope.questionList[$scope.count];
+    	$scope.count++;
+    	/*for(var i=0;i<$scope.questionList.length;i++){
     		var q = $scope.questionList[i];
     		if(q.seq==seq){
     			$scope.question = q;
     			break;
     		}
-    	}
+    	}*/
     	meSpeak.stop();
     };
     
