@@ -16,9 +16,14 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
 	$scope.packageName =  $location.search().packageName;
 	$scope.userChoice = "";
 	
+    meSpeak.loadConfig("resources/js/lib/mespeak_config.json");
+    meSpeak.loadVoice("resources/voices/en/en-us.json");
 
+	$scope.speakQuestion = function(){
+		meSpeak.speak($scope.question.questionText);
+	};
 	
-	
+    
     $scope.getFirstQuestionAndAnswers = function() {
     	/*$http.get('quiz/getQuestionAndAnswers/1').success(function(result) {
         	$scope.question = result[0];
@@ -38,6 +43,7 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
    }
    
     $scope.getQuestionAndAnswers = function(seq) {
+    	
     	if(seq>$scope.totalQuestion){
     		window.location.href = '#/cinemas';
     	}
@@ -52,16 +58,7 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
     			break;
     		}
     	}
-    	
-    	/*$http.get('quiz/getQuestionAndAnswers/'+questionId).success(function(result) {
-        	$scope.question = result[0];
-        	var ans = result[0].answers;
-        	for(var i=0;i<ans.length;i++){
-        		if(ans[i].correctFlg=='T'){
-        			$scope.correctResult = $sanitize(ans[i].answerText);
-        		}
-        	}
-        	$scope.done = false;*/
+    	meSpeak.stop();
     };
     
     $scope.chooseAnswer= function(answer){
