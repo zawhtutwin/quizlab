@@ -4,7 +4,7 @@
  * QuizController
  * @constructor
  */
-var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
+var QuizController = function($scope,$http,$sanitize,$location,$rootScope,$resource) {
 	$rootScope.points=0;
 	$scope.done = false;
 	$scope.questionList = new Array();
@@ -16,8 +16,29 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
 	$scope.packageName =  $location.search().packageName;
 	$scope.userChoice = "";
 	$scope.count =0;
+	$scope.encodingItems=[{id:1,name:"Zawgyi"},{id:2,name:"Unicode"}];
+	$scope.encoding=1;
 	
-	
+    $scope.translate=function(){
+    	var encodingFilePath = "";
+    	if($scope.encoding == 1){
+    		encodingFilePath="resources/Encoding/zawgyi.json";
+    	}
+    	else{
+    		encodingFilePath="resources/Encoding/unicode.json";
+    	}
+    	$resource(encodingFilePath).get(function(data){
+    		$scope.translation = data;
+    		$scope.questionText=data.QUESTION;
+    		$scope.chooseText=data.SELECT;
+    	});
+    };
+    
+    $scope.changedValue=function(item){
+    	$scope.encoding=item.id;
+    	$scope.translate();
+    };
+    
     meSpeak.loadConfig("resources/js/lib/mespeak_config.json");
     meSpeak.loadVoice("resources/voices/en/en-us.json");
 
@@ -42,7 +63,7 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
        		$scope.getFirstQuestionAndAnswers();
        		$scope.loaded = true;
        });
-   }
+   };
    
     $scope.getQuestionAndAnswers = function(seq) {
     	
@@ -81,5 +102,6 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope) {
     	}
     	$scope.done = true;
     };
+    $scope.translate();
     $scope.getAllQuestions();
 };
