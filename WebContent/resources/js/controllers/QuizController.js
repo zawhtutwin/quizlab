@@ -26,8 +26,7 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope,$resou
 		  $scope.packageName =  $location.search().packageName;  
 		  $scope.translate();
 		  $scope.getAllQuestions();
-	}
-	
+	};
 	
     $scope.translate=function(){
     	var encodingFilePath = "";
