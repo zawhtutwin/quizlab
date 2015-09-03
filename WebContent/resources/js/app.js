@@ -29,7 +29,8 @@ App.config(['$routeProvider', function ($routeProvider) {
     
     $routeProvider.when('/quizes', {
         templateUrl: 'quiz/layout',
-        controller: QuizController
+        controller: QuizController,
+        reloadOnSearch: false
     });   
    
 }]);

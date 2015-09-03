@@ -8,16 +8,26 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope,$resou
 	$rootScope.points=0;
 	$scope.done = false;
 	$scope.questionList = new Array();
-	$scope.totalQuestion = 0;
 	$scope.noQuestion = false;
-	$scope.questionText = 'ေမးခြန္း';
-	$scope.chooseText = 'ေရြးရန္';
+	$scope.questionText = '';
+	$scope.chooseText = '';
 	$scope.loaded = false;
-	$scope.packageName =  $location.search().packageName;
 	$scope.userChoice = "";
-	$scope.count =0;
 	$scope.encodingItems=[{id:1,name:"Zawgyi"},{id:2,name:"Unicode"}];
 	$scope.encoding=1;
+	
+	$scope.$on("$routeUpdate", function(event, route) {
+			$scope.init();
+     });
+	
+	$scope.init = function(){
+		  $scope.count =0;
+		  $scope.totalQuestion = 0;
+		  $scope.packageName =  $location.search().packageName;  
+		  $scope.translate();
+		  $scope.getAllQuestions();
+	}
+	
 	
     $scope.translate=function(){
     	var encodingFilePath = "";
@@ -48,9 +58,6 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope,$resou
 	
     
     $scope.getFirstQuestionAndAnswers = function() {
-    	/*$http.get('quiz/getQuestionAndAnswers/1').success(function(result) {
-        	$scope.question = result[0];
-        });*/
     	 $scope.getQuestionAndAnswers(1);
         
     };
@@ -76,13 +83,7 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope,$resou
     	$scope.userChoice="";
     	$scope.question = $scope.questionList[$scope.count];
     	$scope.count++;
-    	/*for(var i=0;i<$scope.questionList.length;i++){
-    		var q = $scope.questionList[i];
-    		if(q.seq==seq){
-    			$scope.question = q;
-    			break;
-    		}
-    	}*/
+
     	meSpeak.stop();
     };
     
@@ -102,6 +103,6 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope,$resou
     	}
     	$scope.done = true;
     };
-    $scope.translate();
-    $scope.getAllQuestions();
+    $scope.init();
+    
 };
