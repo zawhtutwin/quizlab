@@ -30,9 +30,18 @@ public class QuizController {
         return quizService.getQuestionAndAnswers(questionId);
     }
 
-    @RequestMapping(value = "/getQuestionsByPackage/{packageName}", method = RequestMethod.GET)
-    public @ResponseBody List<Question> getQuestionsByPackage(@PathVariable("packageName")String packageName) {
+    @RequestMapping(value = "/getQuestionsByPackage/{packageName}/{font}", method = RequestMethod.GET)
+    public @ResponseBody List<Question> getQuestionsByPackage(@PathVariable("packageName")String packageName,@PathVariable("font")String font) {
+    	
     	QuestionPackage p = quizService.getQuestionPackageByName(packageName);
+    	if("unicode".equals(font)){
+	    	for(Question q:p.getQuestion()){
+	    			Utils.getUnicodeQuestion(q);
+	    			for(Answer a:q.getAnswers()){
+	    				Utils.getUnicodeAnswer(a);
+	    			}
+	    	}
+    	}
     	return p.getQuestion();
     }
     

@@ -46,6 +46,10 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope,$resou
     $scope.changedValue=function(item){
     	$scope.encoding=item.id;
     	$scope.translate();
+    	var flg = window.confirm("Clicking 'OK' will restart the Quiz and change the font. If you don't want to lose your data click 'Cancel'?");
+    	if(flg){
+    		$scope.init();
+    	}
     };
     
     meSpeak.loadConfig("resources/js/lib/mespeak_config.json");
@@ -61,9 +65,12 @@ var QuizController = function($scope,$http,$sanitize,$location,$rootScope,$resou
         
     };
    $scope.getAllQuestions =  function(){
-	   
+	   var font = "zawgyi";
+	   if($scope.encoding== 2){
+		   font = "unicode";
+	   }
 	   //$http.get('quiz/getAllQuestions.json').success(function(result) {
-	   $http.get('quiz/getQuestionsByPackage/'+$scope.packageName).success(function(result) {	
+	   $http.get('quiz/getQuestionsByPackage/'+$scope.packageName+"/"+font).success(function(result) {	
 		   $scope.questionList = result;
        		$scope.totalQuestion = $scope.questionList.length;
        		$scope.getFirstQuestionAndAnswers();
