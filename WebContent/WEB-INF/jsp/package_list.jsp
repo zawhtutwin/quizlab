@@ -17,10 +17,10 @@
 </head>
 <body>
 <div class="container">
-			<c:forEach var = "pkg"   items ="${questionPackageList}" >
-            <div class="row">
-	                <a href="<%= request.getContextPath() %>/admin/getAllQuesionByPackage/${pkg.packageId}"><c:out value="${pkg.packageName}" /></a>
-	        </div> 
-	        </c:forEach>
+	<c:forEach var = "pkg"   items ="${questionPackageList}" >
+	   <div class="row">
+	        <a href="<%= request.getContextPath() %>/admin/getAllQuesionByPackage/${pkg.packageId}/Zawgyi"><c:out value="${pkg.packageName}" /></a>
+		</div> 
+	</c:forEach>
 </body>
 </html>

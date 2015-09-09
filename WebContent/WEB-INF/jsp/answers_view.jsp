@@ -22,11 +22,11 @@ $(document).ready(function() {
 <body>
 <div class="container">
 <div class="row">
-	<a href="${pageContext.request.contextPath}/admin">Packages></a><a href="${pageContext.request.contextPath}/admin/getAllQuesionByPackage/${question.packageId}">Questions></a>Answers
+	<a href="${pageContext.request.contextPath}/admin">Packages></a><a href="${pageContext.request.contextPath}/admin/getAllQuesionByPackage/${question.packageId}/${selectedFont}">Questions></a>Answers
 </div>
 <div class="row">
 <form:form method="POST"  commandName="answer"  action="${pageContext.request.contextPath}/admin/addAnswer"  accept-charset="UTF-8">
-       <legend>အေျဖ</legend>
+       <legend>${answerLabel}</legend>
        <fieldset>
        			<label for="answerText"></label><form:textarea  path="answerText"  cssStyle="width:100%" />
        			<div class="radio">
@@ -56,7 +56,7 @@ $(document).ready(function() {
 	                <c:out value="${ans.correctFlg}"/>
 	            </td>	            
 	            <td>
-	            <a href="<%=request.getContextPath()%>/admin/removeAnswer/${question.questionId}/${ans.answerId}" class="btn btn-danger btn-small">ဖ်က္မည္</a>
+	            <a href="<%=request.getContextPath()%>/admin/removeAnswer/${question.questionId}/${ans.answerId}" class="btn btn-danger btn-small">${deleteAnswerLabel}</a>
 	            </td>
 	            </tr>
             </c:forEach>

@@ -29,20 +29,47 @@ public class AdminController {
 		if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
 			return "redirect:/login";
 		}
+		
+		request.getSession().setAttribute(Constants.FONT,"Zawgyi");
 		model.addAttribute("questionPackageList",quizService.getAllPackages());
 		return "package_list";
 	}
 	
-	@RequestMapping(value = "/getAllQuesionByPackage/{packageId}", method = RequestMethod.GET)
-	String getAllQuesionByPackage(HttpServletRequest request,@PathVariable("packageId")Integer packageId,ModelMap model){
+	@RequestMapping(value = "/getAllQuesionByPackage/{packageId}/{font}", method = RequestMethod.GET)
+	String getAllQuesionByPackage(HttpServletRequest request,@PathVariable("packageId")Integer packageId,
+			@PathVariable("font") String font,ModelMap model){
+		
+		request.getSession().setAttribute(Constants.FONT, font);
+		
 		if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
 				return "redirect:/login";
 		}
 		Question question = new Question();
 		question.setPackageId(packageId);
 		//model.addAttribute("questionList",quizService.getAllQuestions());
+		QuestionPackage p = quizService.getQuestionPackage(packageId);
+		
+		if("Unicode".equals(font)){
+	    	for(Question q:p.getQuestion()){
+	    			Utils.getUnicodeQuestion(q);
+	    			for(Answer a:q.getAnswers()){
+	    				Utils.getUnicodeAnswer(a);
+	    			}
+	    	}
+	    	model.addAttribute("questionLabel", "မေးခွန်းထည့်ရန်");
+	    	model.addAttribute("addAnswerLabel","အဖြေထည့်ရန်");
+	    	model.addAttribute("deleteAnswerLabel", "ဖျက်မည်");
+    	}
+		else {
+			model.addAttribute("questionLabel", "ေမးခြန္းထည့္ရန္");
+			model.addAttribute("addAnswerLabel","အေျဖထည့္ရန္");
+			model.addAttribute("deleteAnswerLabel", "ဖ်က္မည္");
+		}
+		
+		
 		model.addAttribute("question",question);
-		model.addAttribute("questionList",quizService.getQuestionPackage(packageId).getQuestion());
+		model.addAttribute("questionList",p.getQuestion());
+		//model.addAttribute("questionList",quizService.getQuestionPackage(packageId).getQuestion());
 		return "question_list";
 	}
 	
@@ -53,8 +80,9 @@ public class AdminController {
 		  if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
 					return "redirect:/login";
 		  }
+		  String font = request.getSession().getAttribute(Constants.FONT).toString();
 		  quizService.addQuestion(question);
-		  return getAllQuesionByPackage(request,question.getPackageId(), model);
+		  return getAllQuesionByPackage(request,question.getPackageId(),font, model);
 	 }	
 	
 	@RequestMapping(value = "/removeQuestion/{quesionId}/{packageId}", method = RequestMethod.GET)
@@ -62,10 +90,11 @@ public class AdminController {
 			 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
 					return "redirect:/login";
 			}
+			 String font = request.getSession().getAttribute(Constants.FONT).toString(); 
 		  Question filter = new Question();
 		  filter.setQuestionId(questionId);
 		  quizService.removeQuestion(filter);
-		  return getAllQuesionByPackage(request, packageId, model);
+		  return getAllQuesionByPackage(request, packageId,font, model);
 	 }	
 	
 	
@@ -96,7 +125,25 @@ public class AdminController {
 		 if(request.getSession().getAttribute(Constants.LOGIN_USER)==null){
 				return "redirect:/login";
 		 }
+		 String font = request.getSession().getAttribute(Constants.FONT).toString();
 		 List<Question> questionList =  quizService.getQuestionAndAnswers(questionId);
+		 
+		 if("Unicode".equals(font)){
+			 for(Question q : questionList){
+				 Utils.getUnicodeQuestion(q);
+				 for(Answer a:q.getAnswers()){
+	 				Utils.getUnicodeAnswer(a);
+	 			}
+			 }
+			 model.addAttribute("answerLabel", "အဖြေ");
+			 model.addAttribute("deleteAnswerLabel", "ဖျက်မည်");
+		 }
+		 else{
+			 model.addAttribute("answerLabel", "အေျဖ");
+			 model.addAttribute("deleteAnswerLabel", "ဖ်က္မည္");
+		 }
+		 
+		 model.addAttribute("selectedFont", font);
 		 model.addAttribute("question",questionList.get(0));
 		 Answer ans = new Answer();
 		 ans.setQuestionId(questionList.get(0).getQuestionId());
@@ -113,7 +160,7 @@ public class AdminController {
 	 @ModelAttribute("answer")
 	 public Answer createAnswerModel() {
 	     return new Answer();
-	 }	 
-	 
-	 
+	 }
 }
+
+
