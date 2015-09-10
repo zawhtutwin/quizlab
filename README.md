@@ -4,8 +4,8 @@ Live version of the application is at http://quizlab-xvidcoder.rhcloud.com/QuizL
 
 Frameworks
 -
-AngularJS
-SpringMVC
+AngularJS,
+SpringMVC,
 JPA[Hibernate]
 
 Join Chat
