@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html;" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html id='result'>
 <head>
 <meta http-equiv="content-type" content="text/html; charset=UTF-8">.
@@ -29,15 +30,15 @@ $(document).ready(function() {
 <div class="container">
 
 <div class="row">
-	<a href="${pageContext.request.contextPath}/admin/getAllQuesionByPackage/<c:out value="${question.packageId}"/>/Zawgyi">Zawgyi</a>
+	<a href="${pageContext.request.contextPath}/admin/getAllQuesionByPackage/<c:out value="${question.packageId}"/>/Zawgyi?lang=en">Zawgyi</a>
 	|
-	<a href="${pageContext.request.contextPath}/admin/getAllQuesionByPackage/<c:out value="${question.packageId}"/>/Unicode">Unicode</a>
+	<a href="${pageContext.request.contextPath}/admin/getAllQuesionByPackage/<c:out value="${question.packageId}"/>/Unicode?lang=fr">Unicode</a>
 </div>
 
 
 <a href="${pageContext.request.contextPath}/admin">Packages></a>Questions
 <form:form method="POST"  commandName="question"  action="${pageContext.request.contextPath}/admin/addQuestion"  accept-charset="UTF-8">
-       <legend>${questionLabel }</legend>
+       <legend><spring:message code="label.question"/></legend>
        <fieldset>
        			<label for="questionText"></label><form:textarea  path="questionText"  cssStyle="width:100%"/>
        			<form:hidden path="packageId" />
@@ -72,10 +73,10 @@ $(document).ready(function() {
 		                <c:out value="${question.questionText}"/>
 		            </td>
 		            <td>
-		            	<a href="<%= request.getContextPath() %>/admin/answer/view/<c:out value="${question.questionId}"/>"   class="btn btn-success btn-small">${addAnswerLabel}</a>
+		            	<a href="<%= request.getContextPath() %>/admin/answer/view/<c:out value="${question.questionId}"/>"   class="btn btn-success btn-small"><spring:message code="label.enter_answer"/></a>
 		            </td>
 		            <td>
-		            	<a href="<%= request.getContextPath() %>/admin/removeQuestion/<c:out value="${question.questionId}"/>/${question.packageId}"   class="btn btn-danger btn-small">${deleteAnswerLabel}</a>
+		            	<a href="<%= request.getContextPath() %>/admin/removeQuestion/<c:out value="${question.questionId}"/>/${question.packageId}"   class="btn btn-danger btn-small"><spring:message code="label.delete"/></a>
 		            </td>	            
 	            </tr>
             </c:forEach>
