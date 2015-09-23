@@ -1,8 +1,0 @@
-﻿{  
-    "QUESTION" : "မေးခွန်း",
-    "SELECT" : "ရွေးရန်",
-    "ENTER_QUESTION" : "မေးခွန်းထည့်ရန်",
-    "ENTER_ANSWER" : "အဖြေထည့်ရန်",
-    "DELETE" : "ဖျက်မည်",
-    "ANSWER" : "အဖြေ"
-}
