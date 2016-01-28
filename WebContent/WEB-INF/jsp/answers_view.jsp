@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html;" pageEncoding="UTF-8"%>
 <%@taglib uri="http://www.springframework.org/tags/form" prefix="form"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <html>
 <head>
 
@@ -26,7 +27,7 @@ $(document).ready(function() {
 </div>
 <div class="row">
 <form:form method="POST"  commandName="answer"  action="${pageContext.request.contextPath}/admin/addAnswer"  accept-charset="UTF-8">
-       <legend>${answerLabel}</legend>
+       <legend><spring:message code="label.enter_answer"/></legend>
        <fieldset>
        			<label for="answerText"></label><form:textarea  path="answerText"  cssStyle="width:100%" />
        			<div class="radio">
@@ -56,7 +57,7 @@ $(document).ready(function() {
 	                <c:out value="${ans.correctFlg}"/>
 	            </td>	            
 	            <td>
-	            <a href="<%=request.getContextPath()%>/admin/removeAnswer/${question.questionId}/${ans.answerId}" class="btn btn-danger btn-small">${deleteAnswerLabel}</a>
+	            <a href="<%=request.getContextPath()%>/admin/removeAnswer/${question.questionId}/${ans.answerId}" class="btn btn-danger btn-small"><spring:message code="label.delete"/></a>
 	            </td>
 	            </tr>
             </c:forEach>
